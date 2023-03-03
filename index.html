@@ -60,6 +60,11 @@
 
         [lastX, lastY] = [e.offsetX, e.offsetY];
       });
+      canvas.addEventListener('touchstart', e => {
+        isDrawing = true;
+
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+      });
 
       canvas.addEventListener('mousemove', draw);
 
