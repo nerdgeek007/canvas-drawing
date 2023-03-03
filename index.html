@@ -7,11 +7,13 @@
   </head>
 
   <body>
+    <h1>Start painting with mouse</h1>
     <canvas id="draw" width="800" height="800"></canvas>
     <script>
       console.log('it works');
       const canvas = document.querySelector('#draw');
       const ctx = canvas.getContext('2d');
+      const h1 = document.querySelector('h1');
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       ctx.strokeStyle = '#BADA55';
@@ -27,7 +29,9 @@
       let direction = true;
 
       function draw(e) {
-        if (!isDrawing) return; //stop the function running when they are not moused down
+        if (!isDrawing) {
+          return;
+        } //stop the function running when they are not moused down
 
         ctx.strokeStyle = `hsl(${hue},100%,50%)`;
         ctx.beginPath();
@@ -53,6 +57,7 @@
 
       canvas.addEventListener('mousedown', e => {
         isDrawing = true;
+
         [lastX, lastY] = [e.offsetX, e.offsetY];
       });
 
@@ -67,6 +72,9 @@
       body {
         margin: 0;
         overflow: hidden;
+      }
+      h1 {
+        text-align: center;
       }
     </style>
   </body>
