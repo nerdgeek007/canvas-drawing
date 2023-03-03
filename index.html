@@ -67,6 +67,7 @@
       });
 
       canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('touchmove', draw);
 
       canvas.addEventListener('mouseup', () => (isDrawing = false));
       canvas.addEventListener('mouseout', () => (isDrawing = false));
