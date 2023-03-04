@@ -63,6 +63,42 @@
 
       canvas.addEventListener('mouseup', () => (isDrawing = false));
       canvas.addEventListener('mouseout', () => (isDrawing = false));
+
+      //handles touch events
+
+      function touchdraw(e) {
+        if (!isDrawing) {
+          return;
+        } //stop the function running when they are not moused down
+
+        ctx.strokeStyle = `hsl(${hue},100%,50%)`;
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(e.touches[0].pageX, e.touches[0].pageY);
+        ctx.stroke();
+        [lastX, lastY] = [e.touches[0].pageX, e.touches[0].pageY];
+        hue += 10;
+        if (hue >= 360) {
+          hue = 0;
+        }
+
+        if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+          direction = !direction;
+        }
+        if (direction) {
+          ctx.lineWidth++;
+        } else {
+          ctx.lineWidth--;
+        }
+      }
+
+      canvas.addEventListener('touchmove', touchdraw);
+      canvas.addEventListener('touchstart', e => {
+        console.log(e);
+        isDrawing = true;
+        [lastX, lastY] = [e.touches[0].pageX, e.touches[0].pageY];
+      });
+      canvas.addEventListener('touchend', () => (isDrawing = false));
     </script>
 
     <style>
